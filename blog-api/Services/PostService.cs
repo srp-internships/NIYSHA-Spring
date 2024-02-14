@@ -15,9 +15,9 @@ public class PostService : IPostService
         this.mapper = mapper;
     }
 
-    public async Task Create(CreatePostDto dto)
+    public async Task CreateAsync(CreatePostDto dto)
     {
-        var user = uow.UserRepository.GetById(dto.UserId);
+        var user = await uow.UserRepository.GetByIdAsync(dto.UserId);
         if (user is null)
             throw new Exception("User with provided Id was not found.");
 
@@ -25,9 +25,9 @@ public class PostService : IPostService
         await uow.SaveChangesAsync();
     }
 
-    public async Task Delete(int postId)
+    public async Task DeleteAsync(int postId)
     {
-        var post = await repo.GetById(postId);
+        var post = await repo.GetByIdAsync(postId);
 
         if (post is null)
             throw new Exception("Post with provided Id was not found.");
@@ -39,12 +39,12 @@ public class PostService : IPostService
 
     public async Task<List<PostDto>> GetAllAsync()
     {
-        var posts = await repo.GetAll(includeProperties: "User", disableTracking: true);
+        var posts = await repo.GetAllAsync(includeProperties: "User", disableTracking: true);
 
         return mapper.Map<List<PostDto>>(posts);
     }
 
-    public async Task<List<PostDto>> GetPaging(int pageSize = 15, int page = 1)
+    public async Task<List<PostDto>> GetPagingAsync(int pageSize = 15, int page = 1)
     {
         var posts = await repo.GetPagedList(pageSize, page, true);
 
@@ -53,14 +53,14 @@ public class PostService : IPostService
 
     public async Task<List<PostDto>> GetUserPostsAsync(int userId)
     {
-        var posts = await repo.GetAll(x => x.UserId == userId, "User", disableTracking: true);
+        var posts = await repo.GetAllAsync(x => x.UserId == userId, "User", disableTracking: true);
 
         return mapper.Map<List<PostDto>>(posts);
     }
 
-    public async Task Update(UpdatePostDto dto)
+    public async Task UpdateAsync(UpdatePostDto dto)
     {
-        var post = await repo.GetById(dto.Id);
+        var post = await repo.GetByIdAsync(dto.Id);
 
         if (post is null)
             throw new Exception("Post with provided Id was not found.");

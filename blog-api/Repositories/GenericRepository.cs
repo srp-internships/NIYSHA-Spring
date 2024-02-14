@@ -28,7 +28,7 @@ public class GenericRepository<T> : IRepository<T> where T : BaseEntity
         db.Set<T>().Remove(entity);
     }
 
-    public async Task<List<T>> GetAll(Expression<Func<T, bool>> expression = null!, string includeProperties = "", bool disableTracking = false)
+    public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> expression = null!, string includeProperties = "", bool disableTracking = false)
     {
         IQueryable<T> query = db.Set<T>();
 
@@ -46,7 +46,7 @@ public class GenericRepository<T> : IRepository<T> where T : BaseEntity
         return await query.ToListAsync();
     }
 
-    public async Task<T?> GetById(int id, string includeProperties = "", bool disableTracking = false)
+    public async Task<T?> GetByIdAsync(int id, string includeProperties = "", bool disableTracking = false)
     {
         IQueryable<T> query = db.Set<T>();
 

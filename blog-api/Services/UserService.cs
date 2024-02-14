@@ -22,7 +22,7 @@ public class UserService : IUserService
 
     public async Task<List<UserDto>> GetAll()
     {
-        var users = await repo.GetAll(disableTracking: true);
+        var users = await repo.GetAllAsync(disableTracking: true);
 
         return mapper.Map<List<UserDto>>(users);
     }
@@ -31,7 +31,7 @@ public class UserService : IUserService
     {
         username = username.ToUpper();
 
-        var users = await repo.GetAll(x => x.FirstName.ToUpper().Contains(username) ||
+        var users = await repo.GetAllAsync(x => x.FirstName.ToUpper().Contains(username) ||
                                            x.LastName.ToUpper().Contains(username) ||
                                            x.Username.ToUpper().Contains(username));
 

@@ -28,27 +28,27 @@ public class PostsController : ControllerBase
     [HttpGet("paged")]
     public async Task<ActionResult<IEnumerable<PostDto>>> GetPaging([FromQuery] int pageSize = 15, [FromQuery] int page = 1)
     {
-        return Ok(await service.GetPaging(pageSize, page));
+        return Ok(await service.GetPagingAsync(pageSize, page));
     }
 
     [HttpPost]
     public async Task<IActionResult> Create(CreatePostDto dto)
     {
-        await service.Create(dto);
+        await service.CreateAsync(dto);
         return NoContent();
     }
 
     [HttpPut]
     public async Task<IActionResult> Update(UpdatePostDto dto)
     {
-        await service.Update(dto);
+        await service.UpdateAsync(dto);
         return NoContent();
     }
 
     [HttpDelete("{postId}")]
     public async Task<IActionResult> Delete(int postId)
     {
-        await service.Delete(postId);
+        await service.DeleteAsync(postId);
         return NoContent();
     }
 }
