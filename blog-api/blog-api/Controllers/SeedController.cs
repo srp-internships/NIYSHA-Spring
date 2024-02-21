@@ -16,7 +16,7 @@ public class SeedController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Seed()
     {
-        await service.SeedDatabase();
+        await service.SeedDatabaseAsync();
         return Ok();
     }
 }

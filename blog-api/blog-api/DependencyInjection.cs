@@ -11,6 +11,8 @@ public static class DependencyInjection
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IPostService, PostService>();
         services.AddScoped<ISeedService, SeedService>();
+        services.AddScoped<IJsonPlaceholderService, JsonPlaceHolderService>();
+        services.AddScoped<IHttpClientHelper, HttpClientHelper>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         services.AddDbContext<IDataContext, DataContext>(options =>

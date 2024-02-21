@@ -16,12 +16,12 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserDto>>> GetAll()
     {
-        return Ok(await service.GetAll());
+        return Ok(await service.GetAllAsync());
     }
 
     [HttpGet("search/{username}")]
     public async Task<ActionResult<List<UserDto>>> Search(string username)
     {
-        return Ok(await service.Search(username));
+        return Ok(await service.SearchAsync(username));
     }
 }
